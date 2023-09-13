@@ -58,3 +58,38 @@ p {
     letter-spacing: 0px;
     text-decoration: none;
 }
+
+.download__btn.button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    background-color: #141415 !important;
+    background-image: none !important;
+    font-size: 16px;
+    font-weight: 400;
+
+    &:hover {
+        color: white;
+        background-color: #212121 !important;
+        letter-spacing: 0px;
+    }
+
+    span {
+        height: 25px;
+        width: 25px;
+        margin: 0 5px 0 0;
+    }
+
+    svg {
+        height: 100%;
+        width: 100%;
+    }
+}
+
+img {
+    max-width: 100%;
+    vertical-align: middle;
+    display: inline-block;
+}

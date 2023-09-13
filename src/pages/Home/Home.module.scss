@@ -1,9 +1,9 @@
-.content__wrapper {
+.wrapper {
     position: relative;
     padding-top: 3em;
 }
 
-.content__main__container {
+.main__container {
     display: flex;
     overflow: hidden;
     width: 100%;
@@ -12,7 +12,7 @@
     justify-content: center;
 }
 
-.content__inner {
+.inner {
     position: relative;
     display: flex;
     max-width: 900px;
@@ -22,14 +22,14 @@
     align-items: center;
 }
 
-.content__inner__text {
+.inner__text {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
 }
 
-.content__inner__icon {
+.inner__icon {
     display: flex;
     width: 60px;
     height: 60px;
@@ -41,7 +41,7 @@
     background-image: linear-gradient(349deg, #fa5853, #f46692 52%, #ffc444);
 }
 
-.content__grid {
+.grid {
     display: grid;
     grid-auto-columns: 1fr;
     grid-template-columns: 1fr 1fr;
@@ -53,14 +53,14 @@
     grid-template-rows: auto;
 }
 
-.content__inner_desc {
+.inner_desc {
     grid-column-end: 10;
     grid-column-start: 2;
     grid-row-end: 2;
     grid-row-start: 1;
 }
 
-.content__download {
+.download {
     display: flex;
     margin-top: 2em;
     margin-bottom: 3em;
@@ -68,16 +68,142 @@
 
 .download__ios {
     margin-right: 30px;
+    & a {
+        min-width: unset;
+    }
 }
 
-.download__btn {
+.text__sticky {
+    position: sticky;
+    top: 75px;
     display: flex;
+    overflow: visible;
+    width: 99vw;
     flex-direction: row;
     justify-content: center;
+}
+
+.text__holder {
+    position: absolute;
+    top: 200px;
+    display: flex;
+    overflow: hidden;
+    width: 99vw;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.text__holder__1 {
+    overflow: hidden;
+    width: 50vw;
+    text-align: right;
+}
+
+.text__holder__2 {
+    overflow: hidden;
+    text-align: left;
+}
+
+.text__line {
+    position: relative;
+    overflow: hidden;
+    width: 3px;
+    height: 160px;
+    margin-top: 60px;
+    border-radius: 20px;
+    background-image: linear-gradient(90deg, #fa5853, #f46692 50%, #ffc444);
+}
+
+.text {
+    overflow: hidden;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 210px;
+    line-height: 1.2;
+    font-weight: 800;
+}
+
+.text._1 {
+    padding-right: 1rem;
+    background-image: linear-gradient(90deg, #fa5853, #f46692);
+    text-align: right;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.text._2 {
+    width: 48vw;
+    padding-left: 1rem;
+    background-image: linear-gradient(90deg, #f46692, #ffc444);
+    text-align: left;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.product__demo {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 160vh;
+}
+.product__sticky {
+    position: sticky;
+    top: 110px;
+    z-index: 1;
+    min-height: auto;
+    padding-top: 0px;
+}
+.product__phone__image__wrapper {
+}
+.product__container {
+    position: relative;
+    top: -30px;
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    flex-direction: column;
     align-items: center;
-    border-radius: 8px;
-    background-color: #141415;
-    background-image: none;
-    font-size: 16px;
-    font-weight: 400;
+}
+.product__phone__image__holder {
+    position: relative;
+    width: 400px;
+}
+.product__phone__image {
+    width: 100%;
+}
+.product__phone__content {
+    position: absolute;
+    left: 36px;
+    top: 36px;
+    right: 37px;
+    bottom: 35px;
+    z-index: -1;
+    overflow: hidden;
+}
+.product__phone__demo__image {
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    right: 0%;
+    bottom: 0%;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    object-fit: cover;
+}
+.iphone__lock__screen__image {
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    right: 0%;
+    bottom: 0%;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border-radius: 36px;
+    opacity: 1;
+    object-fit: cover;
 }

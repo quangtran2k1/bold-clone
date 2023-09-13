@@ -1,0 +1,83 @@
+.content__wrapper {
+    position: relative;
+    padding-top: 3em;
+}
+
+.content__main__container {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    min-height: 70vh;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.content__inner {
+    position: relative;
+    display: flex;
+    max-width: 900px;
+    margin-right: auto;
+    margin-left: auto;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content__inner__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.content__inner__icon {
+    display: flex;
+    width: 60px;
+    height: 60px;
+    padding: 20px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-image: linear-gradient(349deg, #fa5853, #f46692 52%, #ffc444);
+}
+
+.content__grid {
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-row-gap: 16px;
+    grid-column-gap: 16px;
+    width: 100%;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+}
+
+.content__inner_desc {
+    grid-column-end: 10;
+    grid-column-start: 2;
+    grid-row-end: 2;
+    grid-row-start: 1;
+}
+
+.content__download {
+    display: flex;
+    margin-top: 2em;
+    margin-bottom: 3em;
+}
+
+.download__ios {
+    margin-right: 30px;
+}
+
+.download__btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    background-color: #141415;
+    background-image: none;
+    font-size: 16px;
+    font-weight: 400;
+}

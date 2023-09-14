@@ -9,6 +9,11 @@ const images = {
     icon3: require('~/assets/images/fox-hub-2-dark.png'),
     icon4: require('~/assets/images/utosia-dark.png'),
     icon5: require('~/assets/images/lighting-dark.png'),
+    featureImage1: require('~/assets/images/Feature-Image-01.png'),
+    featureImage2: require('~/assets/images/Features-Image-2-min.png'),
+    quickActionIcon: require('~/assets/images/Quick-Action-Icon.svg').default,
+    shoppingCartIcon: require('~/assets/images/shopping-cart.svg').default,
+    lockIcon: require('~/assets/images/lock.svg').default,
 };
 
 export default images;

@@ -37,6 +37,22 @@ h1 {
     font-weight: 800;
 }
 
+h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-family: Manrope, sans-serif;
+    color: #323232;
+    font-size: 70px;
+    line-height: 1.2;
+    font-weight: 800;
+}
+
+h5 {
+    font-size: 14px;
+    line-height: 20px;
+    margin-top: 10px;
+}
+
 p {
     margin-top: 0;
     margin-bottom: 10px;
@@ -59,7 +75,7 @@ p {
     text-decoration: none;
 }
 
-.download__btn.button {
+.download_btn.button {
     display: flex;
     flex-direction: row;
     justify-content: center;

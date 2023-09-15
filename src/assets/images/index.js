@@ -14,6 +14,10 @@ const images = {
     quickActionIcon: require('~/assets/images/Quick-Action-Icon.svg').default,
     shoppingCartIcon: require('~/assets/images/shopping-cart.svg').default,
     lockIcon: require('~/assets/images/lock.svg').default,
+    boldApp1: require('~/assets/images/BoldApp-1-p-500.jpeg'),
+    boldApp2: require('~/assets/images/BoldApp-2.jpg'),
+    calendar1: require('~/assets/images/Calendar1-p-500.png'),
+    calendar2: require('~/assets/images/Calendar2-p-500.png'),
 };
 
 export default images;

@@ -1,24 +1,146 @@
+/* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { Fragment, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Home.module.scss';
 import images from '~/assets/images';
 import user from '~/assets/user';
-import { AppleFilled, AndroidFilled } from '@ant-design/icons';
+import {
+    AppleFilled,
+    AndroidFilled,
+    TwitterOutlined,
+    InstagramOutlined,
+    LinkedinFilled,
+    FacebookFilled,
+} from '@ant-design/icons';
+import Slider from '~/components/Layouts/Slider';
 
 const cx = classNames.bind(styles);
 
 export default function Home() {
     const [isMore, setIsMore] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
+    const [rotation, setRotation] = useState(0);
+    const [change, setChange] = useState(100);
+    const [hoveredIndex, setHoveredIndex] = useState(null);
+    const [backgroundColor, setBackgroundColor] = useState('rgb(255, 255, 255)');
     function handleClick() {
         setIsMore(!isMore);
-        console.log(isMore);
     }
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setRotation((prevRotation) => prevRotation + 1);
+        }, 50);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    useEffect(() => {
+        let hoverInterval;
+
+        if (hoveredIndex !== null) {
+            hoverInterval = setInterval(() => {
+                setChange((prevChange) => {
+                    if (prevChange > 0) {
+                        return prevChange - 2.5;
+                    }
+                    return prevChange;
+                });
+            }, 1);
+        } else {
+            clearInterval(hoverInterval);
+        }
+
+        return () => clearInterval(hoverInterval);
+    }, [hoveredIndex]);
+
+    const handleMouseEnter = (index) => {
+        setHoveredIndex(index);
+    };
+
+    const handleMouseLeave = () => {
+        setHoveredIndex(null);
+        setChange(100);
+    };
+
+    const handleScroll = () => {
+        const element = document.getElementById('NightMode');
+
+        if (element) {
+            const rect = element.getBoundingClientRect();
+            const elementY = rect.top;
+            const elementYBottom = rect.bottom;
+            const windowHeight = window.innerHeight;
+
+            const distanceFromTop = Math.max(0, elementY);
+            const distanceFromBottom = Math.max(100, elementYBottom);
+            const maxDistance = windowHeight / 2;
+
+            let newRed, newGreen, newBlue;
+
+            if (distanceFromBottom > 300) {
+                newRed = Math.min(255, 20 + (235 * distanceFromTop) / maxDistance);
+                newGreen = Math.min(255, 20 + (235 * distanceFromTop) / maxDistance);
+                newBlue = Math.min(255, 21 + (234 * distanceFromTop) / maxDistance);
+                setIsVisible(true);
+            }
+            if (distanceFromBottom <= 300) {
+                newRed = Math.max(244, 20 + (224 * distanceFromBottom) / maxDistance);
+                newGreen = Math.max(248, 20 + (228 * distanceFromBottom) / maxDistance);
+                newBlue = Math.max(251, 21 + (230 * distanceFromBottom) / maxDistance);
+                setIsVisible(false);
+            }
+
+            const newBackgroundColor = `rgb(${newRed}, ${newGreen}, ${newBlue})`;
+
+            setBackgroundColor(newBackgroundColor);
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    const nightModeStyle = {
+        backgroundColor: backgroundColor, // Sử dụng giá trị màu động từ state
+        transition: 'background-color 0.05s ease-in-out',
+    };
+    const ellipseStyle = {
+        transform: `rotateZ(${rotation}deg)`,
+    };
+
+    const slides = [
+        <img
+            src="https://assets.website-files.com/604b35876a71cbbd84768e36/604d4b5ee9f5d3561967d646_ChatList-White-p-500.jpeg"
+            alt="slide"
+            className={cx('phone_slider_image')}
+        />,
+        <img
+            src="https://assets.website-files.com/604b35876a71cbbd84768e36/604d4b5d2582aa2cb7e78d36_Calendar1-p-500.png"
+            alt="slide"
+            className={cx('phone_slider_image')}
+        />,
+        <img
+            src="https://assets.website-files.com/604b35876a71cbbd84768e36/604d4b5db64f644b318b64f9_Calendar2-p-500.png"
+            alt="slide"
+            className={cx('phone_slider_image')}
+        />,
+    ];
+
+    const items = ['Change Log', 'Style', 'Licensing', 'Privacy'];
+
     return (
-        <Fragment>
+        <div onScroll={handleScroll}>
             <div className={cx('wrapper')}>
-                <div cx={cx('eclipse_holder')}></div>
-                <div cx={cx('main_container')}>
+                <div className={cx('eclipse_holder')}>
+                    <div className={cx('eclipse_left')} style={ellipseStyle}></div>
+                    <div className={cx('eclipse_right')} style={ellipseStyle}></div>
+                </div>
+                <div className={cx('main_container')}>
                     <div className={cx('inner')}>
                         <div className={cx('inner_text')}>
                             <div className={cx('inner_icon')}>
@@ -99,7 +221,7 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <div style={{ height: '50vh', marginTop: '50vh' }}>
+            <div style={{ marginTop: '50vh' }}>
                 <div className={cx('container')}>
                     <div className={cx('customers_panel')}>
                         <div className={cx('panel__text_holder')}>
@@ -133,7 +255,7 @@ export default function Home() {
                 <div className={cx('container')}>
                     <div className={cx('text_center')}>
                         <div className={cx('fade_in_on_scroll')}>
-                            <h2 className={cx('text_gardient_2')}>Experience your product as you create it.</h2>
+                            <h2 className={cx('text_gradient_2')}>Experience your product as you create it.</h2>
                         </div>
                         <div className={cx('text_container')}>
                             <div className={cx('fade_in_on_scroll')}>
@@ -235,7 +357,7 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <div id="About">
+            <div id="About" style={nightModeStyle}>
                 <div className={cx('container')}>
                     <div className={cx('w_layout_grid', 'grid_6_col')}>
                         <div className={cx('trusted_content', 'grid_start_1_3')}>
@@ -313,13 +435,13 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <div id="DarkMode" style={{ backgroundColor: 'rgb(20, 20, 21' }}>
+            <div id="NightMode" style={nightModeStyle}>
                 <div className={cx('container')}>
                     <div className={cx('w_layout_grid', 'grid_10_column')}>
                         <div className={cx('content', 'grid_start_2_10')}>
                             <div className={cx('text_center')}>
                                 <div className={cx('fade_in_on_scroll')}>
-                                    <h2 className={cx('text_gardient_2')}>Feels great in low-light environments.</h2>
+                                    <h2 className={cx('text_gradient_2')}>Feels great in low-light environments.</h2>
                                 </div>
                                 <div className={cx('text_container')}>
                                     <div className={cx('fade_in_on_scroll')}>
@@ -457,18 +579,195 @@ export default function Home() {
                                     ))}
                                 </div>
                             </div>
-                        ) : (
+                        ) : isVisible ? (
                             <div className={cx('testimonial_see_more')}>
                                 <div className={cx('fade_in_on_scroll')}>
-                                    <a className={cx('button', 'w_button')} onClick={handleClick}>
+                                    <a
+                                        className={cx('button', 'w_button')}
+                                        onClick={handleClick}
+                                        style={{ minWidth: '140px' }}
+                                    >
                                         Show more
                                     </a>
                                 </div>
                             </div>
-                        )}
+                        ) : null}
                     </div>
                 </div>
             </div>
-        </Fragment>
+            <div id="Subscribe" style={nightModeStyle}>
+                <div className={cx('container')}>
+                    <div className={cx('w_layout_grid', 'grid_10_column')}>
+                        <div className={cx('grid_start_2_10', 'card_item', 'light')}>
+                            <div className={cx('card_item_content')}>
+                                <div className={cx('fade_in_on_scroll')}>
+                                    <h2 className={cx('text_gradient_2')}>
+                                        Stay tuned &<br />
+                                        Build your business.
+                                    </h2>
+                                </div>
+                                <div className={cx('fade_in_on_scroll')}>
+                                    <p className={cx('text_xs')}>We will email you only about this product.</p>
+                                </div>
+                                <div id="Subscribe" className={cx('subscribe_form', 'w_form')}>
+                                    <form className={cx('subscribe_form_flex')}>
+                                        <div className={cx('subscribe_form_input_wrapper')}>
+                                            <input
+                                                type="email"
+                                                className={cx('form_input', 'subscribe_input', 'w_input')}
+                                                maxLength={'256'}
+                                                placeholder="Your Email"
+                                            />
+                                        </div>
+                                        <input
+                                            type="submit"
+                                            value={''}
+                                            className={cx('button', 'w_button', 'btn_subscribe')}
+                                        />
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="Download" style={{ backgroundColor: 'rgb(244, 248, 251)' }}>
+                <div className={cx('container', 'phone_container')}>
+                    <div className={cx('w_layout_grid', 'grid_6_col')}>
+                        <div className={cx('content', 'phone_content_text', 'grid_start_1_3')}>
+                            <div className={cx('fade_in_on_scroll')}>
+                                <div className={cx('app_icon_text_holder')}>
+                                    <div className={cx('app_icon_holder_xs')}>
+                                        <img src={images.appIcon} alt="icon" className="app_icon" />
+                                    </div>
+                                    <div>Download now and start your experience</div>
+                                </div>
+                            </div>
+                            <div className={cx('fade_in_on_scroll')}>
+                                <h2>Manage it all, in this all new system.</h2>
+                            </div>
+                            <div className={cx('download')}>
+                                <div className={cx('download_ios')}>
+                                    <a
+                                        href="http://apple.com"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className={cx('download_btn', 'button')}
+                                    >
+                                        <AppleFilled />
+                                        Download for iOS
+                                    </a>
+                                </div>
+                                <div className={cx('download_android', 'last')}>
+                                    <a
+                                        href="https://play.google.com/store/apps"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className={cx('download_btn', 'button')}
+                                    >
+                                        <AndroidFilled />
+                                        Download for Android
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={cx('content', 'phone_content_text', 'grid_start_1_3')}>
+                            <div className={cx('phone_holder_container')}>
+                                <div className={cx('phone_slider_container')}>
+                                    <div className={cx('phone_slider', 'w_slider')}>
+                                        <div className={cx('phone_slider_mask', 'w_slider_mask')}>
+                                            <Slider slides={slides} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <img src={images.handPhone} alt="hand phone" className={cx('phone_holder_image')} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className={cx('footer')}>
+                <div className={cx('container')}>
+                    <div className={cx('footer_social_media_container')}>
+                        <div className={cx('social_media_content')}>
+                            <div className={cx('fade_in_on_scroll')}>
+                                <div>Follow us</div>
+                            </div>
+                            <a
+                                href="http://instagram.com/"
+                                target="_blank"
+                                className={cx('social_media_link', 'w_inline_block')}
+                            >
+                                <InstagramOutlined />
+                            </a>
+                            <a
+                                href="http://twitter.com/"
+                                target="_blank"
+                                className={cx('social_media_link', 'w_inline_block')}
+                            >
+                                <TwitterOutlined />
+                            </a>
+                            <a
+                                href="http://linkedin.com/"
+                                target="_blank"
+                                className={cx('social_media_link', 'w_inline_block')}
+                            >
+                                <LinkedinFilled />
+                            </a>
+                            <a
+                                href="http://facebook.com/"
+                                target="_blank"
+                                className={cx('social_media_link', 'w_inline_block')}
+                            >
+                                <FacebookFilled />
+                            </a>
+                        </div>
+                        <div className={cx('made_container')}>
+                            <div className={cx('clone_by_quang')}>
+                                <div className={cx('made_by_holder')}>
+                                    <div className={cx('made_by')}>Clone by</div>
+                                    <a
+                                        href="https://www.facebook.com/quang.on.social.networks"
+                                        className={cx('external_link', 'w_inline_block')}
+                                    >
+                                        <div>Quang</div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={cx('footer_flex_container')}>
+                        <div className={cx('footer_brand_container')}>
+                            <a href="/" className={cx('footer_logo_link', 'w_inline_block', 'w_current')}>
+                                <img src={images.logoFooter} alt="logo" className={cx('footer_image')} />
+                            </a>
+                            <ul className={cx('footer_list', 'w_list_unstyled')}>
+                                {items.map((item, index) => (
+                                    <li
+                                        className={cx('footer_list_item')}
+                                        key={index}
+                                        onMouseEnter={() => handleMouseEnter(index)}
+                                        onMouseLeave={handleMouseLeave}
+                                    >
+                                        <a href="/" className={cx('link', 'w_inline_block')}>
+                                            <div>{item}</div>
+                                            <div
+                                                className={cx('link_underline')}
+                                                style={{
+                                                    transform: `translate3d(0px, ${
+                                                        hoveredIndex === index ? change : 100
+                                                    }%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)`,
+                                                    transformStyle: 'preserve-3d',
+                                                }}
+                                            ></div>
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }

@@ -1,5 +1,6 @@
 const images = {
     logo: require('~/assets/images/logo.svg').default,
+    logoFooter: require('~/assets/images/Bold-Logo-Grey.svg').default,
     appIcon: require('~/assets/images/App-Icon.svg').default,
     phoneImg: require('~/assets/images/iPhone-11-Pro-Space-Grey-1.png'),
     charListImg: require('~/assets/images/ChatList-White-p-500.jpeg'),
@@ -18,6 +19,8 @@ const images = {
     boldApp2: require('~/assets/images/BoldApp-2.jpg'),
     calendar1: require('~/assets/images/Calendar1-p-500.png'),
     calendar2: require('~/assets/images/Calendar2-p-500.png'),
+    arrowIcon: require('~/assets/images/Arrow-White.svg').default,
+    handPhone: require('~/assets/images/Hand-iPhoneX.png'),
 };
 
 export default images;

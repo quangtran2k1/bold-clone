@@ -1,0 +1,66 @@
+.text_sticky {
+    position: sticky;
+    top: 75px;
+    display: flex;
+    overflow: visible;
+    width: 99vw;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.text_holder {
+    position: absolute;
+    top: 200px;
+    display: flex;
+    overflow: hidden;
+    width: 99vw;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.text_holder_1 {
+    overflow: hidden;
+    width: 50vw;
+    text-align: right;
+}
+
+.text_holder_2 {
+    overflow: hidden;
+    text-align: left;
+}
+
+.text_line {
+    position: relative;
+    overflow: hidden;
+    width: 3px;
+    height: 160px;
+    margin-top: 60px;
+    border-radius: 20px;
+    background-image: linear-gradient(90deg, #fa5853, #f46692 50%, #ffc444);
+}
+
+.text {
+    overflow: hidden;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 210px;
+    line-height: 1.2;
+    font-weight: 800;
+}
+
+.text._1 {
+    padding-right: 1rem;
+    background-image: linear-gradient(90deg, #fa5853, #f46692);
+    text-align: right;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.text._2 {
+    width: 48vw;
+    padding-left: 1rem;
+    background-image: linear-gradient(90deg, #f46692, #ffc444);
+    text-align: left;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

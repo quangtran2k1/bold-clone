@@ -21,6 +21,9 @@ export default function Home() {
     const [isMore, setIsMore] = useState(false);
     const [isVisible, setIsVisible] = useState(true);
     const [rotation, setRotation] = useState(0);
+    const [transformY, setTransformY] = useState(0);
+    const [transformLeft, setTransformLeft] = useState(0);
+    const [transformRight, setTransformRight] = useState(0);
     const [change, setChange] = useState(100);
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const [backgroundColor, setBackgroundColor] = useState('rgb(255, 255, 255)');
@@ -66,6 +69,7 @@ export default function Home() {
 
     const handleScroll = () => {
         const element = document.getElementById('NightMode');
+        const element1 = document.getElementById('PhoneProduct');
 
         if (element) {
             const rect = element.getBoundingClientRect();
@@ -96,6 +100,40 @@ export default function Home() {
 
             setBackgroundColor(newBackgroundColor);
         }
+
+        if (element1) {
+            const rect = element1.getBoundingClientRect();
+            const elementY = rect.top - 100;
+            const elementYBottom = rect.bottom;
+            const windowHeight = window.innerHeight;
+
+            const distanceFromTop = Math.max(0, elementY);
+            const distanceFromBottom = Math.max(100, elementYBottom);
+            const maxDistance = windowHeight / 2;
+            console.log(distanceFromTop);
+
+            const newTransform = -((maxDistance - distanceFromTop) / maxDistance) * 100;
+            const clampedTransform = Math.max(-100, Math.min(0, newTransform));
+            setTransformY(clampedTransform);
+
+            if (distanceFromBottom > 300) {
+                const newTransformRight = ((maxDistance - distanceFromTop) / maxDistance) * 150;
+                const clampedTransformRight = Math.max(0, Math.min(150, newTransformRight));
+                setTransformRight(clampedTransformRight);
+
+                const newTransformLeft = -((maxDistance - distanceFromTop) / maxDistance) * 150;
+                const clampedTransformLeft = Math.max(-150, Math.min(0, newTransformLeft));
+                setTransformLeft(clampedTransformLeft);
+            } else {
+                const newTransformRight = 150 - ((maxDistance - distanceFromTop) / maxDistance) * 150;
+                const clampedTransformRight = Math.max(0, Math.min(150, newTransformRight));
+                setTransformRight(clampedTransformRight);
+
+                const newTransformLeft = 150 - ((maxDistance - distanceFromTop) / maxDistance) * 150;
+                const clampedTransformLeft = Math.max(-150, Math.min(0, newTransformLeft));
+                setTransformLeft(clampedTransformLeft);
+            }
+        }
     };
 
     useEffect(() => {
@@ -111,6 +149,21 @@ export default function Home() {
     };
     const ellipseStyle = {
         transform: `rotateZ(${rotation}deg)`,
+    };
+    const transformStyle = {
+        willChange: 'transform',
+        transform: `translate3d(0px, ${transformY}%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)`,
+        transformStyle: 'preserve-3d',
+    };
+    const transformXLeftStyle = {
+        willChange: 'transform',
+        transform: `translate3d(${transformLeft}px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)`,
+        transformStyle: 'preserve-3d',
+    };
+    const transformXRightStyle = {
+        willChange: 'transform',
+        transform: `translate3d(${transformRight}px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)`,
+        transformStyle: 'preserve-3d',
     };
 
     const slides = [
@@ -183,11 +236,10 @@ export default function Home() {
                 <div className={cx('inner')}>
                     <div className={cx('text_sticky')}>
                         <div className={cx('text_holder')}>
-                            <div className={cx('text_holder_1')}>
+                            <div className={cx('text_holder_1')} style={transformXLeftStyle}>
                                 <h1 className={cx('text', '_1')}>Meet</h1>
                             </div>
-                            <div className={cx('text_line')}></div>
-                            <div className={cx('text_holder _2')}>
+                            <div className={cx('text_holder _2')} style={transformXRightStyle}>
                                 <h1 className={cx('text', '_2')}>Bold</h1>
                             </div>
                         </div>
@@ -196,7 +248,7 @@ export default function Home() {
                         <div className={cx('product_sticky')}>
                             <div className={cx('product_phone_image_wrapper')}>
                                 <div className={cx('product_container')}>
-                                    <div className={cx('product_phone_image_holder')}>
+                                    <div id="PhoneProduct" className={cx('product_phone_image_holder')}>
                                         <img
                                             src={images.phoneImg}
                                             alt="PhoneImage"
@@ -212,6 +264,7 @@ export default function Home() {
                                                 src={images.lockScreenImg}
                                                 alt="lock screen img"
                                                 className={cx('iphone_lock_screen_image')}
+                                                style={transformStyle}
                                             />
                                         </div>
                                     </div>

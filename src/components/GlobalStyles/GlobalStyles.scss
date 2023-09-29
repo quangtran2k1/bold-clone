@@ -172,3 +172,66 @@ a {
     color: #323232;
     text-decoration: none;
 }
+
+@media screen and (max-width: 991px) {
+    h1 {
+        font-size: 60px;
+    }
+
+    h2 {
+        font-size: 55px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    h1 {
+        font-size: 55px;
+    }
+
+    h2 {
+        font-size: 45px;
+    }
+
+    h3 {
+        font-size: 40px;
+    }
+
+    h4 {
+        font-size: 30px;
+    }
+
+    h5 {
+        font-size: 24px;
+    }
+
+    blockquote {
+        font-size: 22px;
+    }
+
+    .button {
+        margin-bottom: 5px;
+    }
+}
+
+@media screen and (max-width: 479px) {
+    h1 {
+        font-size: 44px;
+    }
+
+    h2 {
+        font-size: 38px;
+    }
+
+    h3 {
+        font-size: 30px;
+        font-weight: 500;
+    }
+
+    h4 {
+        font-size: 28px;
+    }
+
+    h5 {
+        font-weight: 400;
+    }
+}

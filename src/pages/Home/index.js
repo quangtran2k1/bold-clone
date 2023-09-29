@@ -110,8 +110,6 @@ export default function Home() {
             const distanceFromTop = Math.max(0, elementY);
             const distanceFromBottom = Math.max(100, elementYBottom);
             const maxDistance = windowHeight / 2;
-            console.log(distanceFromTop);
-
             const newTransform = -((maxDistance - distanceFromTop) / maxDistance) * 100;
             const clampedTransform = Math.max(-100, Math.min(0, newTransform));
             setTransformY(clampedTransform);
@@ -144,7 +142,7 @@ export default function Home() {
     }, []);
 
     const nightModeStyle = {
-        backgroundColor: backgroundColor, // Sử dụng giá trị màu động từ state
+        backgroundColor: backgroundColor,
         transition: 'background-color 0.05s ease-in-out',
     };
     const ellipseStyle = {
@@ -199,7 +197,11 @@ export default function Home() {
                             <div className={cx('inner_icon')}>
                                 <img src={images.appIcon} alt="app icon" />
                             </div>
-                            <h1 className={cx('main_heading')}>Manage it all, in this all new system.</h1>
+                            <h1 className={cx('main_heading')}>
+                                Gọi Timos
+                                <br />
+                                Oto đến tận nhà
+                            </h1>
                             <div className={cx('w_layout_grid', 'grid_10_col')}>
                                 <p className={cx('inner_desc')}>
                                     Bold keeps your team’s work on-brand, on message, and on time. Innovative features
@@ -209,7 +211,7 @@ export default function Home() {
                             <div className={cx('download')}>
                                 <div className={cx('download_ios')}>
                                     <a
-                                        href="http://apple.com"
+                                        href="https://apps.apple.com/vn/app/t%C3%A0i-x%E1%BA%BF-timos/id1634958830"
                                         target="_blank"
                                         rel="noreferrer"
                                         className={cx('download_btn', 'button')}
@@ -702,7 +704,7 @@ export default function Home() {
                             <div className={cx('download')}>
                                 <div className={cx('download_ios')}>
                                     <a
-                                        href="http://apple.com"
+                                        href="https://apps.apple.com/vn/app/t%C3%A0i-x%E1%BA%BF-timos/id1634958830"
                                         target="_blank"
                                         rel="noreferrer"
                                         className={cx('download_btn', 'button')}

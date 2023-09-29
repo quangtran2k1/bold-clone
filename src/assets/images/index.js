@@ -1,5 +1,6 @@
 const images = {
-    logo: require('~/assets/images/logo.svg').default,
+    logo: require('~/assets/images/logo.png'),
+    logoPreLoader: require('~/assets/images/logo-Timos.png'),
     logoFooter: require('~/assets/images/Bold-Logo-Grey.svg').default,
     appIcon: require('~/assets/images/App-Icon.svg').default,
     phoneImg: require('~/assets/images/iPhone-11-Pro-Space-Grey-1.png'),

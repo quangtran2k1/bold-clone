@@ -78,7 +78,7 @@ export default function Home() {
             const windowHeight = window.innerHeight;
 
             const distanceFromTop = Math.max(0, elementY);
-            const distanceFromBottom = Math.max(100, elementYBottom);
+            const distanceFromBottom = Math.max(0, elementYBottom);
             const maxDistance = windowHeight / 2;
 
             let newRed, newGreen, newBlue;
@@ -88,12 +88,17 @@ export default function Home() {
                 newGreen = Math.min(255, 20 + (235 * distanceFromTop) / maxDistance);
                 newBlue = Math.min(255, 21 + (234 * distanceFromTop) / maxDistance);
                 setIsVisible(true);
-            }
-            if (distanceFromBottom <= 300) {
+            } else {
                 newRed = Math.max(244, 20 + (224 * distanceFromBottom) / maxDistance);
                 newGreen = Math.max(248, 20 + (228 * distanceFromBottom) / maxDistance);
                 newBlue = Math.max(251, 21 + (230 * distanceFromBottom) / maxDistance);
                 setIsVisible(false);
+                console.log({
+                    newRed: 224 * distanceFromBottom,
+                    newGreen: 228 * distanceFromBottom,
+                    newBlue: 230 * distanceFromBottom,
+                    distanceFromBottom: distanceFromBottom,
+                });
             }
 
             const newBackgroundColor = `rgb(${newRed}, ${newGreen}, ${newBlue})`;
@@ -108,13 +113,13 @@ export default function Home() {
             const windowHeight = window.innerHeight;
 
             const distanceFromTop = Math.max(0, elementY);
-            const distanceFromBottom = Math.max(100, elementYBottom);
+            const distanceFromBottom = Math.max(0, elementYBottom);
             const maxDistance = windowHeight / 2;
             const newTransform = -((maxDistance - distanceFromTop) / maxDistance) * 100;
             const clampedTransform = Math.max(-100, Math.min(0, newTransform));
             setTransformY(clampedTransform);
 
-            if (distanceFromBottom > 300) {
+            if (distanceFromBottom > 400) {
                 const newTransformRight = ((maxDistance - distanceFromTop) / maxDistance) * 150;
                 const clampedTransformRight = Math.max(0, Math.min(150, newTransformRight));
                 setTransformRight(clampedTransformRight);
@@ -123,12 +128,12 @@ export default function Home() {
                 const clampedTransformLeft = Math.max(-150, Math.min(0, newTransformLeft));
                 setTransformLeft(clampedTransformLeft);
             } else {
-                const newTransformRight = 150 - ((maxDistance - distanceFromTop) / maxDistance) * 150;
-                const clampedTransformRight = Math.max(0, Math.min(150, newTransformRight));
+                const newTransformRight = -((maxDistance - 500 - distanceFromBottom) / 300) * 150;
+                const clampedTransformRight = Math.min(150, Math.max(0, newTransformRight));
                 setTransformRight(clampedTransformRight);
 
-                const newTransformLeft = 150 - ((maxDistance - distanceFromTop) / maxDistance) * 150;
-                const clampedTransformLeft = Math.max(-150, Math.min(0, newTransformLeft));
+                const newTransformLeft = ((maxDistance - distanceFromBottom - 500) / 300) * 150;
+                const clampedTransformLeft = Math.min(0, Math.max(-150, newTransformLeft));
                 setTransformLeft(clampedTransformLeft);
             }
         }
@@ -222,7 +227,7 @@ export default function Home() {
                                 </div>
                                 <div className={cx('download_android', 'last')}>
                                     <a
-                                        href="https://play.google.com/store/apps"
+                                        href="https://play.google.com/store/apps/details?id=takecare.vn.limousine&ref=apkcombo.com"
                                         target="_blank"
                                         rel="noreferrer"
                                         className={cx('download_btn', 'button')}
@@ -360,36 +365,25 @@ export default function Home() {
                             <div className={cx('card_item_content')}>
                                 <div className={cx('card_feature_center')}>
                                     <div className={cx('fade_in_on_scroll')}>
-                                        <img
-                                            src={images.quickActionIcon}
-                                            className={cx('card_feature_icon')}
-                                            alt="icon"
-                                        />
+                                        <img src={images.timos} className={cx('card_feature_icon')} alt="icon" />
                                     </div>
                                     <div className={cx('fade_in_on_scroll')}>
-                                        <p>Speed up your work and reduce repetitive tasks.</p>
+                                        <a
+                                            href="https://play.google.com/store/apps/details?id=takecare.vn.limousine&ref=apkcombo.com"
+                                            className={cx('external_link', 'w_inline_block')}
+                                            target="_blank"
+                                        >
+                                            <h6>Timos - Đặt xe trực tuyến</h6>
+                                        </a>
                                     </div>
                                     <div className={cx('fade_in_on_scroll')}>
-                                        <h6>Quick Actions</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className={cx('card_item', 'light', 'grid_start_1_3')}>
-                            <div className={cx('card_item_content')}>
-                                <div className={cx('card_feature_center')}>
-                                    <div className={cx('fade_in_on_scroll')}>
-                                        <img
-                                            src={images.shoppingCartIcon}
-                                            className={cx('card_feature_icon')}
-                                            alt="icon"
-                                        />
-                                    </div>
-                                    <div className={cx('fade_in_on_scroll')}>
-                                        <h6>Easy shop</h6>
-                                    </div>
-                                    <div className={cx('fade_in_on_scroll')}>
-                                        <p>Speed up your work and reduce repetitive tasks.</p>
+                                        <a
+                                            href="https://play.google.com/store/apps/details?id=takecare.vn.limousine&ref=apkcombo.com"
+                                            className={cx('w_inline_block')}
+                                            target="_blank"
+                                        >
+                                            <p>takecare.vn.limousine</p>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -398,13 +392,52 @@ export default function Home() {
                             <div className={cx('card_item_content')}>
                                 <div className={cx('card_feature_center')}>
                                     <div className={cx('fade_in_on_scroll')}>
-                                        <img src={images.lockIcon} className={cx('card_feature_icon')} alt="icon" />
+                                        <img src={images.booking} className={cx('card_feature_icon')} alt="icon" />
                                     </div>
                                     <div className={cx('fade_in_on_scroll')}>
-                                        <h6>Safe and Secure</h6>
+                                        <a
+                                            href="https://play.google.com/store/apps/details?id=takecare.hn.trungchuyen&ref=apkcombo.com"
+                                            className={cx('external_link', 'w_inline_block')}
+                                            target="_blank"
+                                        >
+                                            <h6>Trung Chuyển Timos</h6>
+                                        </a>
                                     </div>
                                     <div className={cx('fade_in_on_scroll')}>
-                                        <p>Speed up your work and reduce repetitive tasks.</p>
+                                        <a
+                                            href="https://play.google.com/store/apps/details?id=takecare.hn.trungchuyen&ref=apkcombo.com"
+                                            className={cx('w_inline_block')}
+                                            target="_blank"
+                                        >
+                                            <p>takecare.hn.trungchuyen</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={cx('card_item', 'light', 'grid_start_1_3')}>
+                            <div className={cx('card_item_content')}>
+                                <div className={cx('card_feature_center')}>
+                                    <div className={cx('fade_in_on_scroll')}>
+                                        <img src={images.timosDriver} className={cx('card_feature_icon')} alt="icon" />
+                                    </div>
+                                    <div className={cx('fade_in_on_scroll')}>
+                                        <a
+                                            href="https://play.google.com/store/apps/details?id=takecare.vn.dieuhanh_timos&ref=apkcombo.com"
+                                            className={cx('external_link', 'w_inline_block')}
+                                            target="_blank"
+                                        >
+                                            <h6>Tài xế Timos </h6>
+                                        </a>
+                                    </div>
+                                    <div className={cx('fade_in_on_scroll')}>
+                                        <a
+                                            href="https://play.google.com/store/apps/details?id=takecare.vn.dieuhanh_timos&ref=apkcombo.com"
+                                            className={cx('w_inline_block')}
+                                            target="_blank"
+                                        >
+                                            <p>takecare.vn.dieuhanh_timos</p>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -715,7 +748,7 @@ export default function Home() {
                                 </div>
                                 <div className={cx('download_android', 'last')}>
                                     <a
-                                        href="https://play.google.com/store/apps"
+                                        href="https://play.google.com/store/apps/details?id=takecare.vn.limousine&ref=apkcombo.com"
                                         target="_blank"
                                         rel="noreferrer"
                                         className={cx('download_btn', 'button')}

@@ -4,32 +4,26 @@ import React, { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Home.module.scss';
 import images from '~/assets/images';
-import user from '~/assets/user';
+import CarouselReviews from '~/components/Layouts/Carousel';
 import {
     AppleFilled,
     AndroidFilled,
-    TwitterOutlined,
-    InstagramOutlined,
-    LinkedinFilled,
     FacebookFilled,
+    MailOutlined,
+    PhoneFilled,
+    GooglePlusCircleFilled,
+    TwitterCircleFilled,
+    InstagramFilled,
 } from '@ant-design/icons';
-import Slider from '~/components/Layouts/Slider';
 
 const cx = classNames.bind(styles);
 
 export default function Home() {
-    const [isMore, setIsMore] = useState(false);
-    const [isVisible, setIsVisible] = useState(true);
     const [rotation, setRotation] = useState(0);
     const [transformY, setTransformY] = useState(0);
     const [transformLeft, setTransformLeft] = useState(0);
     const [transformRight, setTransformRight] = useState(0);
-    const [change, setChange] = useState(100);
-    const [hoveredIndex, setHoveredIndex] = useState(null);
     const [backgroundColor, setBackgroundColor] = useState('rgb(255, 255, 255)');
-    function handleClick() {
-        setIsMore(!isMore);
-    }
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -39,36 +33,8 @@ export default function Home() {
         return () => clearInterval(interval);
     }, []);
 
-    useEffect(() => {
-        let hoverInterval;
-
-        if (hoveredIndex !== null) {
-            hoverInterval = setInterval(() => {
-                setChange((prevChange) => {
-                    if (prevChange > 0) {
-                        return prevChange - 2.5;
-                    }
-                    return prevChange;
-                });
-            }, 1);
-        } else {
-            clearInterval(hoverInterval);
-        }
-
-        return () => clearInterval(hoverInterval);
-    }, [hoveredIndex]);
-
-    const handleMouseEnter = (index) => {
-        setHoveredIndex(index);
-    };
-
-    const handleMouseLeave = () => {
-        setHoveredIndex(null);
-        setChange(100);
-    };
-
     const handleScroll = () => {
-        const element = document.getElementById('NightMode');
+        const element = document.getElementById('DangKy');
         const element1 = document.getElementById('PhoneProduct');
 
         if (element) {
@@ -87,18 +53,6 @@ export default function Home() {
                 newRed = Math.min(255, 20 + (235 * distanceFromTop) / maxDistance);
                 newGreen = Math.min(255, 20 + (235 * distanceFromTop) / maxDistance);
                 newBlue = Math.min(255, 21 + (234 * distanceFromTop) / maxDistance);
-                setIsVisible(true);
-            } else {
-                newRed = Math.max(244, 20 + (224 * distanceFromBottom) / maxDistance);
-                newGreen = Math.max(248, 20 + (228 * distanceFromBottom) / maxDistance);
-                newBlue = Math.max(251, 21 + (230 * distanceFromBottom) / maxDistance);
-                setIsVisible(false);
-                console.log({
-                    newRed: 224 * distanceFromBottom,
-                    newGreen: 228 * distanceFromBottom,
-                    newBlue: 230 * distanceFromBottom,
-                    distanceFromBottom: distanceFromBottom,
-                });
             }
 
             const newBackgroundColor = `rgb(${newRed}, ${newGreen}, ${newBlue})`;
@@ -169,25 +123,7 @@ export default function Home() {
         transformStyle: 'preserve-3d',
     };
 
-    const slides = [
-        <img
-            src="https://assets.website-files.com/604b35876a71cbbd84768e36/604d4b5ee9f5d3561967d646_ChatList-White-p-500.jpeg"
-            alt="slide"
-            className={cx('phone_slider_image')}
-        />,
-        <img
-            src="https://assets.website-files.com/604b35876a71cbbd84768e36/604d4b5d2582aa2cb7e78d36_Calendar1-p-500.png"
-            alt="slide"
-            className={cx('phone_slider_image')}
-        />,
-        <img
-            src="https://assets.website-files.com/604b35876a71cbbd84768e36/604d4b5db64f644b318b64f9_Calendar2-p-500.png"
-            alt="slide"
-            className={cx('phone_slider_image')}
-        />,
-    ];
-
-    const items = ['Change Log', 'Style', 'Licensing', 'Privacy'];
+    const currentYear = new Date().getFullYear();
 
     return (
         <div onScroll={handleScroll}>
@@ -204,19 +140,22 @@ export default function Home() {
                             </div>
                             <h1 className={cx('main_heading')}>
                                 Gọi Timos
-                                <br />
-                                Oto đến tận nhà
+                                <br />Ô tô đến tận nhà
                             </h1>
                             <div className={cx('w_layout_grid', 'grid_10_col')}>
                                 <p className={cx('inner_desc')}>
-                                    Bold keeps your team’s work on-brand, on message, and on time. Innovative features
-                                    make creating and sharing your work feel effortless.
+                                    Ứng dụng đặt vé xe rẻ, nhanh chóng, tiện lợi với nhiều loại hình liên tỉnh:
+                                    <br />
+                                    Limousine, tiện chuyến, xe ghép, xe sân bay, xe giường nằm. <br />
+                                    <br />
+                                    Luôn phục vụ khách hàng mọi lúc mọi nơi. Nhanh tay truy cập ứng dụng để trải nghiệm
+                                    những dịch vụ tốt nhất.
                                 </p>
                             </div>
                             <div className={cx('download')}>
                                 <div className={cx('download_ios')}>
                                     <a
-                                        href="https://apps.apple.com/vn/app/t%C3%A0i-x%E1%BA%BF-timos/id1634958830"
+                                        href="https://apps.apple.com/vn/app/timos-%C4%91%E1%BA%B7t-xe-tr%E1%BB%B1c-tuy%E1%BA%BFn/id1563546063?l=vi"
                                         target="_blank"
                                         rel="noreferrer"
                                         className={cx('download_btn', 'button')}
@@ -227,7 +166,7 @@ export default function Home() {
                                 </div>
                                 <div className={cx('download_android', 'last')}>
                                     <a
-                                        href="https://play.google.com/store/apps/details?id=takecare.vn.limousine&ref=apkcombo.com"
+                                        href="https://play.google.com/store/apps/details?id=takecare.vn.limousine&pli=1"
                                         target="_blank"
                                         rel="noreferrer"
                                         className={cx('download_btn', 'button')}
@@ -244,10 +183,10 @@ export default function Home() {
                     <div className={cx('text_sticky')}>
                         <div className={cx('text_holder')}>
                             <div className={cx('text_holder_1')} style={transformXLeftStyle}>
-                                <h1 className={cx('text', '_1')}>Meet</h1>
+                                <h1 className={cx('text', '_1')}>Timos</h1>
                             </div>
                             <div className={cx('text_holder _2')} style={transformXRightStyle}>
-                                <h1 className={cx('text', '_2')}>Bold</h1>
+                                <h1 className={cx('text', '_2')}>Corp</h1>
                             </div>
                         </div>
                     </div>
@@ -263,7 +202,7 @@ export default function Home() {
                                         />
                                         <div className={cx('product_phone_content')}>
                                             <img
-                                                src={images.charListImg}
+                                                src={images.homeImg}
                                                 alt="char list img"
                                                 className={cx('product_phone_demo_image')}
                                             />
@@ -287,46 +226,32 @@ export default function Home() {
                         <div className={cx('panel__text_holder')}>
                             <div className={cx('text_center')}>
                                 <div className={cx('fade_in_on_scroll')}>
-                                    <h5>More than 1,200,000 creative people use it</h5>
+                                    <h5> Hơn 10000 khách hàng tin dùng và sử dụng</h5>
                                 </div>
-                            </div>
-                        </div>
-                        <div className={cx('w_layout_grid', 'grid_5_col')}>
-                            <div className={cx('content', 'centered')}>
-                                <img src={images.icon1} alt="asgardian" className={cx('customer_image')} />
-                            </div>
-                            <div className={cx('content', 'centered')}>
-                                <img src={images.icon2} alt="asgardian" className={cx('customer_image')} />
-                            </div>
-                            <div className={cx('content', 'centered')}>
-                                <img src={images.icon3} alt="asgardian" className={cx('customer_image')} />
-                            </div>
-                            <div className={cx('content', 'centered')}>
-                                <img src={images.icon4} alt="asgardian" className={cx('customer_image')} />
-                            </div>
-                            <div className={cx('content', 'centered')}>
-                                <img src={images.icon5} alt="asgardian" className={cx('customer_image')} />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="FeatureList" style={{ backgroundColor: '#f4f8fb' }}>
+            <div id="DanhGia" style={{ backgroundColor: '#f4f8fb' }}>
                 <div className={cx('container')}>
                     <div className={cx('text_center')}>
                         <div className={cx('fade_in_on_scroll')}>
-                            <h2 className={cx('text_gradient_2')}>Experience your product as you create it.</h2>
+                            <h2 className={cx('text_gradient_2')}>Đánh giá và sự trải nghiệm của Khách hàng.</h2>
                         </div>
                         <div className={cx('text_container')}>
                             <div className={cx('fade_in_on_scroll')}>
                                 <p>
-                                    Bold keeps your team’s work on-brand, on message, and on time. Innovative features
-                                    make creating and sharing your work feel effortless.
+                                    Timos giúp bạn có chuyến đi đúng thương hiệu, đúng thông điệp và đúng thời gian. Các
+                                    dịch vụ luôn luôn đổi mới, cập nhật xu hướng khách hàng giúp việc lựa chọn và trải
+                                    nhiệm chuyến đi của bạn trở nên dễ dàng, thú vị và tiện ích hơn.
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <div className={cx('w_layout_grid', 'feature_grid')}>
+
+                    <CarouselReviews />
+                    {/* <div className={cx('w_layout_grid', 'feature_grid')}>
                         <div className={cx('card_item', 'light', 'grid_start_1_5')}>
                             <div className={cx('card_item_content')}>
                                 <div className={cx('fade_in_on_scroll')}>
@@ -368,22 +293,7 @@ export default function Home() {
                                         <img src={images.timos} className={cx('card_feature_icon')} alt="icon" />
                                     </div>
                                     <div className={cx('fade_in_on_scroll')}>
-                                        <a
-                                            href="https://play.google.com/store/apps/details?id=takecare.vn.limousine&ref=apkcombo.com"
-                                            className={cx('external_link', 'w_inline_block')}
-                                            target="_blank"
-                                        >
-                                            <h6>Timos - Đặt xe trực tuyến</h6>
-                                        </a>
-                                    </div>
-                                    <div className={cx('fade_in_on_scroll')}>
-                                        <a
-                                            href="https://play.google.com/store/apps/details?id=takecare.vn.limousine&ref=apkcombo.com"
-                                            className={cx('w_inline_block')}
-                                            target="_blank"
-                                        >
-                                            <p>takecare.vn.limousine</p>
-                                        </a>
+                                        <h6>Timos - Đặt xe trực tuyến</h6>
                                     </div>
                                 </div>
                             </div>
@@ -395,22 +305,7 @@ export default function Home() {
                                         <img src={images.booking} className={cx('card_feature_icon')} alt="icon" />
                                     </div>
                                     <div className={cx('fade_in_on_scroll')}>
-                                        <a
-                                            href="https://play.google.com/store/apps/details?id=takecare.hn.trungchuyen&ref=apkcombo.com"
-                                            className={cx('external_link', 'w_inline_block')}
-                                            target="_blank"
-                                        >
-                                            <h6>Trung Chuyển Timos</h6>
-                                        </a>
-                                    </div>
-                                    <div className={cx('fade_in_on_scroll')}>
-                                        <a
-                                            href="https://play.google.com/store/apps/details?id=takecare.hn.trungchuyen&ref=apkcombo.com"
-                                            className={cx('w_inline_block')}
-                                            target="_blank"
-                                        >
-                                            <p>takecare.hn.trungchuyen</p>
-                                        </a>
+                                        <h6>Trung Chuyển Timos</h6>
                                     </div>
                                 </div>
                             </div>
@@ -422,120 +317,28 @@ export default function Home() {
                                         <img src={images.timosDriver} className={cx('card_feature_icon')} alt="icon" />
                                     </div>
                                     <div className={cx('fade_in_on_scroll')}>
-                                        <a
-                                            href="https://play.google.com/store/apps/details?id=takecare.vn.dieuhanh_timos&ref=apkcombo.com"
-                                            className={cx('external_link', 'w_inline_block')}
-                                            target="_blank"
-                                        >
-                                            <h6>Tài xế Timos </h6>
-                                        </a>
-                                    </div>
-                                    <div className={cx('fade_in_on_scroll')}>
-                                        <a
-                                            href="https://play.google.com/store/apps/details?id=takecare.vn.dieuhanh_timos&ref=apkcombo.com"
-                                            className={cx('w_inline_block')}
-                                            target="_blank"
-                                        >
-                                            <p>takecare.vn.dieuhanh_timos</p>
-                                        </a>
+                                        <h6>Tài xế Timos </h6>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
-            <div id="About" style={nightModeStyle}>
-                <div className={cx('container')}>
-                    <div className={cx('w_layout_grid', 'grid_6_col')}>
-                        <div className={cx('trusted_content', 'grid_start_1_3')}>
-                            <div className={cx('content_sticky')}>
-                                <div className={cx('fade_in_on_scroll')}>
-                                    <h2>We are trusted by thousands of people</h2>
-                                </div>
-                                <div className={cx('fade_in_on_scroll')}>
-                                    <p className={cx('text_x1')}>
-                                        Lean on Stories+ to maximize the value of your most compelling social content
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className={cx('trusted_content', 'trusted_list', 'grid_start_1_3')}>
-                            <div className={cx('trusted_overlay_container')}>
-                                <div className={cx('trusted_white_overlay')}></div>
-                                <div className={cx('trusted_white_overlay', 'bottom')}></div>
-                            </div>
-                            <div className={cx('trusted_item')}>
-                                <div className={cx('trusted_item_header')}>
-                                    <h2 className={cx('trusted_no')}>5.0</h2>
-                                    <h5>review average in our app</h5>
-                                </div>
-                                <div className={cx('fade_in_on_scroll')}>
-                                    <p className={cx('text_x1')}>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris magna urna,
-                                        sodales vel quam ut, tincidunt ultrices arcu. Suspendisse vehicula id est a
-                                        varius.
-                                    </p>
-                                </div>
-                            </div>
-                            <div className={cx('trusted_item')}>
-                                <div className={cx('trusted_item_header')}>
-                                    <h2 className={cx('trusted_no')}>35+</h2>
-                                    <h5>minutes per session</h5>
-                                </div>
-                                <div className={cx('fade_in_on_scroll')}>
-                                    <p className={cx('text_x1')}>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris magna urna,
-                                        sodales vel quam ut, tincidunt ultrices arcu. Suspendisse vehicula id est a
-                                        varius.
-                                    </p>
-                                </div>
-                            </div>
-                            <div className={cx('trusted_item')}>
-                                <div className={cx('trusted_item_header')}>
-                                    <h2 className={cx('trusted_no')}>
-                                        $0<span className={cx('text_small')}>.00</span>
-                                    </h2>
-                                    <h5>everything is FREE</h5>
-                                </div>
-                                <div className={cx('fade_in_on_scroll')}>
-                                    <p className={cx('text_x1')}>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris magna urna,
-                                        sodales vel quam ut, tincidunt ultrices arcu. Suspendisse vehicula id est a
-                                        varius.
-                                    </p>
-                                </div>
-                            </div>
-                            <div className={cx('trusted_item', 'last')}>
-                                <div className={cx('trusted_item_header')}>
-                                    <h2 className={cx('trusted_no')}>9k</h2>
-                                    <h5>New businesses /m</h5>
-                                </div>
-                                <div className={cx('fade_in_on_scroll')}>
-                                    <p className={cx('text_x1')}>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris magna urna,
-                                        sodales vel quam ut, tincidunt ultrices arcu. Suspendisse vehicula id est a
-                                        varius.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="NightMode" style={nightModeStyle}>
+            <div id="DangKy" style={nightModeStyle}>
                 <div className={cx('container')}>
                     <div className={cx('w_layout_grid', 'grid_10_column')}>
                         <div className={cx('content', 'grid_start_2_10')}>
                             <div className={cx('text_center')}>
                                 <div className={cx('fade_in_on_scroll')}>
-                                    <h2 className={cx('text_gradient_2')}>Feels great in low-light environments.</h2>
+                                    <h2 className={cx('text_gradient_2')}>Đăng ký để trở thành đối tác Timos.</h2>
                                 </div>
                                 <div className={cx('text_container')}>
                                     <div className={cx('fade_in_on_scroll')}>
                                         <p className={cx('white_text')}>
-                                            It works great with Dark Mode with endless experience in low-light
-                                            environments.
+                                            Timos cung cấp sàn thương mại điện tử, giúp Khách hàng và tài xế có thể
+                                            tương tác trực tiếp và lựa chọn những chuyến đi dễ dàng phù hợp với sự lựa
+                                            chọn của mình.
                                         </p>
                                     </div>
                                 </div>
@@ -552,14 +355,9 @@ export default function Home() {
                                             <div className={cx('card_iphone_overlay')}></div>
                                             <div className={cx('card_phone_image_container')}>
                                                 <img
-                                                    src={images.boldApp1}
+                                                    src={images.loginImg}
                                                     alt="bold app"
                                                     className={cx('card_iphone_screenlock')}
-                                                />
-                                                <img
-                                                    src={images.boldApp2}
-                                                    alt="bold app2"
-                                                    className={cx('width_pct')}
                                                 />
                                             </div>
                                         </div>
@@ -587,14 +385,9 @@ export default function Home() {
                                             <div className={cx('card_iphone_overlay')}></div>
                                             <div className={cx('card_phone_image_container')}>
                                                 <img
-                                                    src={images.calendar1}
+                                                    src={images.login1Img}
                                                     alt="calendar"
                                                     className={cx('card_iphone_screenlock')}
-                                                />
-                                                <img
-                                                    src={images.calendar2}
-                                                    alt="calendar"
-                                                    className={cx('width_pct')}
                                                 />
                                             </div>
                                         </div>
@@ -612,246 +405,117 @@ export default function Home() {
                                     </div>
                                 </div>
                             </div>
-                            <div className={cx('dont_take_our_word_title')}>
-                                <div className={cx('fade_in_on_scroll')}>
-                                    <h3 className={cx('white_text')}>Don't take our word for it.</h3>
-                                </div>
-                            </div>
                         </div>
-                    </div>
-                    <div className={cx('testimonials_container')}>
-                        <div className={cx('w_layout_grid', 'grid_testimonial')}>
-                            {user.map((m) => (
-                                <div className={cx('card_item', 'grid_start_1_2')} key={m.id}>
-                                    <div className={cx('card_item_content')}>
-                                        <div className={cx('testimonial_header')}>
-                                            <img src={m.avatar} alt="avatar" className={cx('testimonial_picture')} />
-                                            <div className={cx('testimonial_text')}>
-                                                <div className={cx('white_text')}>{m.name}</div>
-                                                <div className={cx('light_grey')}>{m.position}</div>
-                                            </div>
-                                        </div>
-                                        <div className={cx('fade_in_on_scroll')}>
-                                            <p className={cx('white_text')}>
-                                                <span>{m.desc}</span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                        {isMore ? (
-                            <div className={cx('testimonial_more')}>
-                                <div className={cx('w_layout_grid', 'grid_testimonial')}>
-                                    {user.map((m) => (
-                                        <div className={cx('card_item', 'grid_start_1_2')} key={m.id}>
-                                            <div className={cx('card_item_content')}>
-                                                <div className={cx('testimonial_header')}>
-                                                    <img
-                                                        src={m.avatar}
-                                                        alt="avatar"
-                                                        className={cx('testimonial_picture')}
-                                                    />
-                                                    <div className={cx('testimonial_text')}>
-                                                        <div className={cx('white_text')}>{m.name}</div>
-                                                        <div className={cx('light_grey')}>{m.position}</div>
-                                                    </div>
-                                                </div>
-                                                <div className={cx('fade_in_on_scroll')}>
-                                                    <p className={cx('white_text')}>
-                                                        <span>{m.desc}</span>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        ) : isVisible ? (
-                            <div className={cx('testimonial_see_more')}>
-                                <div className={cx('fade_in_on_scroll')}>
-                                    <a
-                                        className={cx('button', 'w_button')}
-                                        onClick={handleClick}
-                                        style={{ minWidth: '140px' }}
-                                    >
-                                        Show more
-                                    </a>
-                                </div>
-                            </div>
-                        ) : null}
                     </div>
                 </div>
             </div>
-            <div id="Subscribe" style={nightModeStyle}>
+            <div className={cx('footer')} style={{ backgroundColor: 'black' }}>
                 <div className={cx('container')}>
-                    <div className={cx('w_layout_grid', 'grid_10_column')}>
-                        <div className={cx('grid_start_2_10', 'card_item', 'light')}>
-                            <div className={cx('card_item_content')}>
-                                <div className={cx('fade_in_on_scroll')}>
-                                    <h2 className={cx('text_gradient_2')}>
-                                        Stay tuned &<br />
-                                        Build your business.
-                                    </h2>
-                                </div>
-                                <div className={cx('fade_in_on_scroll')}>
-                                    <p className={cx('text_xs')}>We will email you only about this product.</p>
-                                </div>
-                                <div id="Subscribe" className={cx('subscribe_form', 'w_form')}>
-                                    <form className={cx('subscribe_form_flex')}>
-                                        <div className={cx('subscribe_form_input_wrapper')}>
-                                            <input
-                                                type="email"
-                                                className={cx('form_input', 'subscribe_input', 'w_input')}
-                                                maxLength={'256'}
-                                                placeholder="Your Email"
-                                            />
-                                        </div>
-                                        <input
-                                            type="submit"
-                                            value={''}
-                                            className={cx('button', 'w_button', 'btn_subscribe')}
-                                        />
-                                    </form>
-                                </div>
+                    <div className={cx('w_layout_grid', 'footer_grid')}>
+                        <div className={cx('grid_start_1_4', 'float_left')}>
+                            <div>
+                                <a className={cx('footer_brand')} href="/">
+                                    <img src={images.logo} alt="Timos" />
+                                </a>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="Download" style={{ backgroundColor: 'rgb(244, 248, 251)' }}>
-                <div className={cx('container', 'phone_container')}>
-                    <div className={cx('w_layout_grid', 'grid_6_col')}>
-                        <div className={cx('content', 'phone_content_text', 'grid_start_1_3')}>
-                            <div className={cx('fade_in_on_scroll')}>
-                                <div className={cx('app_icon_text_holder')}>
-                                    <div className={cx('app_icon_holder_xs')}>
-                                        <img src={images.appIcon} alt="icon" className="app_icon" />
-                                    </div>
-                                    <div>Download now and start your experience</div>
-                                </div>
+                            <div style={{ marginTop: '20px' }}>
+                                <h4 className={cx('footer_title')}>Về chúng tôi</h4>
+                                <p className={cx('footer_text')}>
+                                    We want to help bring talanted students and unique startups together.
+                                </p>
                             </div>
-                            <div className={cx('fade_in_on_scroll')}>
-                                <h2>Manage it all, in this all new system.</h2>
-                            </div>
-                            <div className={cx('download')}>
-                                <div className={cx('download_ios')}>
-                                    <a
-                                        href="https://apps.apple.com/vn/app/t%C3%A0i-x%E1%BA%BF-timos/id1634958830"
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className={cx('download_btn', 'button')}
-                                    >
-                                        <AppleFilled />
-                                        Download for iOS
-                                    </a>
-                                </div>
-                                <div className={cx('download_android', 'last')}>
-                                    <a
-                                        href="https://play.google.com/store/apps/details?id=takecare.vn.limousine&ref=apkcombo.com"
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className={cx('download_btn', 'button')}
-                                    >
-                                        <AndroidFilled />
-                                        Download for Android
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div className={cx('content', 'phone_content_text', 'grid_start_1_3')}>
-                            <div className={cx('phone_holder_container')}>
-                                <div className={cx('phone_slider_container')}>
-                                    <div className={cx('phone_slider', 'w_slider')}>
-                                        <div className={cx('phone_slider_mask', 'w_slider_mask')}>
-                                            <Slider slides={slides} />
-                                        </div>
-                                    </div>
-                                </div>
-                                <img src={images.handPhone} alt="hand phone" className={cx('phone_holder_image')} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className={cx('footer')}>
-                <div className={cx('container')}>
-                    <div className={cx('footer_social_media_container')}>
-                        <div className={cx('social_media_content')}>
-                            <div className={cx('fade_in_on_scroll')}>
-                                <div>Follow us</div>
-                            </div>
-                            <a
-                                href="http://instagram.com/"
-                                target="_blank"
-                                className={cx('social_media_link', 'w_inline_block')}
-                            >
-                                <InstagramOutlined />
-                            </a>
-                            <a
-                                href="http://twitter.com/"
-                                target="_blank"
-                                className={cx('social_media_link', 'w_inline_block')}
-                            >
-                                <TwitterOutlined />
-                            </a>
-                            <a
-                                href="http://linkedin.com/"
-                                target="_blank"
-                                className={cx('social_media_link', 'w_inline_block')}
-                            >
-                                <LinkedinFilled />
-                            </a>
-                            <a
-                                href="http://facebook.com/"
-                                target="_blank"
-                                className={cx('social_media_link', 'w_inline_block')}
-                            >
-                                <FacebookFilled />
-                            </a>
-                        </div>
-                        <div className={cx('made_container')}>
-                            <div className={cx('clone_by_quang')}>
-                                <div className={cx('made_by_holder')}>
-                                    <div className={cx('made_by')}>Clone by</div>
-                                    <a
-                                        href="https://www.facebook.com/quang.on.social.networks"
-                                        className={cx('external_link', 'w_inline_block')}
-                                    >
-                                        <div>Quang</div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className={cx('footer_flex_container')}>
-                        <div className={cx('footer_brand_container')}>
-                            <a href="/" className={cx('footer_logo_link', 'w_inline_block', 'w_current')}>
-                                <img src={images.logoFooter} alt="logo" className={cx('footer_image')} />
-                            </a>
-                            <ul className={cx('footer_list', 'w_list_unstyled')}>
-                                {items.map((item, index) => (
-                                    <li
-                                        className={cx('footer_list_item')}
-                                        key={index}
-                                        onMouseEnter={() => handleMouseEnter(index)}
-                                        onMouseLeave={handleMouseLeave}
-                                    >
-                                        <a href="/" className={cx('link', 'w_inline_block')}>
-                                            <div>{item}</div>
-                                            <div
-                                                className={cx('link_underline')}
-                                                style={{
-                                                    transform: `translate3d(0px, ${
-                                                        hoveredIndex === index ? change : 100
-                                                    }%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)`,
-                                                    transformStyle: 'preserve-3d',
-                                                }}
-                                            ></div>
+                            <div style={{ marginTop: '20px' }}>
+                                <h4 className={cx('footer_title')}>Liên hệ</h4>
+                                <ul style={{ listStyle: 'none', paddingLeft: '0px' }}>
+                                    <li>
+                                        <MailOutlined className={cx('footer_icon')} />
+                                        <a className={cx('footer_link')} href="mailto:test@test.com">
+                                            youremail.com
                                         </a>
                                     </li>
-                                ))}
-                            </ul>
+                                    <li>
+                                        <PhoneFilled className={cx('footer_icon')} />
+                                        <a className={cx('footer_link')} href="tel:+919999999999">
+                                            +91 9999 999 999
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className={cx('grid_start_1_4', 'float_left')}>
+                            <div>
+                                <h4 className={cx('footer_title')}>Khách hàng</h4>
+                            </div>
+                            <div>
+                                <ul style={{ listStyle: 'none', paddingLeft: '0px' }}>
+                                    <li>
+                                        <a className={cx('footer_link')} href="#">
+                                            Thông tin dịch vụ mới nhất
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a className={cx('footer_link')} href="#">
+                                            Hướng dẫn đặt vé trực tuyến
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a className={cx('footer_link')} href="#">
+                                            Chính sách Khách hàng
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className={cx('grid_start_1_4', 'float_left')}>
+                            <div>
+                                <h4 className={cx('footer_title')}>Tài xế</h4>
+                            </div>
+                            <div>
+                                <ul style={{ listStyle: 'none', paddingLeft: '0px' }}>
+                                    <li>
+                                        <a className={cx('footer_link')} href="#">
+                                            Hướng dẫn đăng ký tài khoản trực tuyến
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a className={cx('footer_link')} href="#">
+                                            Chương trình đặc biệt
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a className={cx('footer_link')} href="#">
+                                            Quy định An toàn – Chất Lượng – Gian Lận
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a className={cx('footer_link')} href="#">
+                                            Bộ quy tắc ứng xử cho quý tài xế Timos
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={cx('outline_footer')}></div>
+                    <div className={cx('w_layout_grid', 'footer_grid')} style={{ margin: 'unset' }}>
+                        <div className={cx('grid_start_1_5', 'float_left')}>
+                            <div className={cx('footer_block')}>
+                                <FacebookFilled className={cx('footer_icon')} />
+                                <GooglePlusCircleFilled className={cx('footer_icon')} />
+                                <TwitterCircleFilled className={cx('footer_icon')} />
+                                <InstagramFilled className={cx('footer_icon')} />
+                            </div>
+                        </div>
+                        <div className={cx('grid_start_1_2')}>
+                            <div className={cx('footer_hidden')}>
+                                <FacebookFilled className={cx('footer_icon')} />
+                                <GooglePlusCircleFilled className={cx('footer_icon')} />
+                                <TwitterCircleFilled className={cx('footer_icon')} />
+                                <InstagramFilled className={cx('footer_icon')} />
+                            </div>
+                        </div>
+                        <div className={cx('grid_start_1_5')} style={{ textAlign: 'right' }}>
+                            <p className={cx('footer_text')}>{currentYear}&#169; Company Ltd. All rights reserved</p>
                         </div>
                     </div>
                 </div>
